@@ -7,7 +7,9 @@ namespace SalesWebCommercial
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
-            builder.Services.AddDbContext<SalesWebCommercialContext>(options => options.UseMySQL(builder.Configuration.GetConnectionString("SalesWebCommercialContext") ?? throw new InvalidOperationException("Connection string 'SalesWebCommercialContext' not found."), builder => builder.MigrationsAssembly("SalesWebCommercial")));
+            builder.Services.AddDbContext<SalesWebCommercialContext>(options =>
+            options.UseMySQL(builder.Configuration.GetConnectionString("SalesWebCommercialContext") ?? throw new InvalidOperationException("Connection string 'SalesWebCommercialContext' not found."),
+                builder => builder.MigrationsAssembly("SalesWebCommercial")));
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
