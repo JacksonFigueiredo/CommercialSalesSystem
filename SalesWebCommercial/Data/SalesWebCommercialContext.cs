@@ -5,12 +5,14 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using SalesWebCommercial.Models;
 
-    public class SalesWebCommercialContext : DbContext
+public class SalesWebCommercialContext : DbContext
+{
+    public SalesWebCommercialContext(DbContextOptions<SalesWebCommercialContext> options)
+        : base(options)
     {
-        public SalesWebCommercialContext (DbContextOptions<SalesWebCommercialContext> options)
-            : base(options)
-        {
-        }
-
-        public DbSet<SalesWebCommercial.Models.Department> Department { get; set; } = default!;
     }
+
+    public DbSet<Department> Department { get; set; } = default!;
+    public DbSet<Seller> Seller { get; set; } = default!;
+    public DbSet<SalesRecord> SalesRecord { get; set; } = default!;
+}
