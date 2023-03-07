@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using SalesWebCommercial.Data;
+using SalesWebCommercial.Services;
 
 namespace SalesWebCommercial
 {
@@ -17,6 +18,7 @@ namespace SalesWebCommercial
             builder.Services.AddControllersWithViews();
 
             builder.Services.AddScoped<SeedingService>();
+            builder.Services.AddScoped<SellerService>();
 
 
             var app = builder.Build();
