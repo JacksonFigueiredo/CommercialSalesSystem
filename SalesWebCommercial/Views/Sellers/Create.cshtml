@@ -13,20 +13,23 @@
     <div class="co-md-4">
         <form asp-action="Create">
             <div class="form-group">
-                <label asp-for="Name" clas="control-label"></label>
+                <label asp-for="Name" class="control-label"></label>
                 <input asp-for="Name" class="form-control" />
             </div>
             <div class="form-group">
-                <label asp-for="Email" clas="control-label"></label>
+                <label asp-for="Email" class="control-label"></label>
                 <input asp-for="Email" class="form-control" />
             </div>
             <div class="form-group">
-                <label asp-for="BirthDate" clas="control-label"></label>
+                <label asp-for="BirthDate" class="control-label">Birth Date</label>
                 <input asp-for="BirthDate" class="form-control" />
             </div>
             <div class="form-group">
-                <label asp-for="BaseSalary" clas="control-label"></label>
-                <input asp-for="BaseSalary" class="form-control" />
+                <label asp-for="BaseSalary" class="control-label">Base Salary</label>
+                <input asp-for="BaseSalary" class="form-control"  />
+            </div>
+            <div class="form-group">
+             <input type="submit" value="Create" class="btn btn-dark" />
             </div>
         </form>
     </div>
