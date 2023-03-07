@@ -19,5 +19,10 @@ namespace SalesWebCommercial.Controllers
 
             return View(list);
         }
+
+        public IActionResult Create() 
+        {
+            return View();
+        }
     }
 }
