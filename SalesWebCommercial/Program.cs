@@ -6,15 +6,6 @@ namespace SalesWebCommercial
 {
     public class Program
     {
-
-        private readonly IServiceProvider _serviceProvider;
-
-        public Program(IServiceProvider serviceProvider)
-        {
-            _serviceProvider = serviceProvider;
-        }
-
-
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
@@ -36,7 +27,6 @@ namespace SalesWebCommercial
                 var seedingService = scope.ServiceProvider.GetService<SeedingService>();
                 seedingService.Populate();
             }
-
 
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
