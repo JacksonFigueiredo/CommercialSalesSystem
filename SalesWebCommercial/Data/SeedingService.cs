@@ -13,7 +13,7 @@ namespace SalesWebCommercial.Data
 
         public void Populate()
         {
-            if (!_context.Department.Any() || _context.Seller.Any())
+            if (!_context.Department.Any() || !_context.Seller.Any())
             {
                 Department department1 = new Department(1, "Computers");
                 Department department2 = new Department(2, "Electronics");
