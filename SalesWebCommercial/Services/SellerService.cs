@@ -34,6 +34,12 @@ namespace SalesWebCommercial.Services
             }
         }
 
-     
+        public void Insert(Seller seller)
+        {
+            _context.Add(seller);
+            _context.SaveChanges();
+        }
+
+
     }
 }
