@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SalesWebCommercial.Data;
 using SalesWebCommercial.Models;
+using SalesWebCommercial.Models.ViewModels;
 using SalesWebCommercial.Services;
 
 namespace SalesWebCommercial.Controllers
@@ -7,12 +9,13 @@ namespace SalesWebCommercial.Controllers
     public class SellersController : Controller
     {
         private readonly SellerService _sellerService;
+        private readonly DepartmentService _departmentService;
 
-        public SellersController(SellerService sellerService)
+        public SellersController(SellerService sellerService,DepartmentService departmentService)
         {
             _sellerService = sellerService;
+            _departmentService = departmentService;
         }
-
 
         public IActionResult Index()
         {
@@ -23,7 +26,9 @@ namespace SalesWebCommercial.Controllers
 
         public IActionResult Create()
         {
-            return View();
+            var departments = _departmentService.ListDepartments();
+            var viewModel = new SellerFormViewModel {Departments = departments};
+            return View(viewModel);
         }
 
 
