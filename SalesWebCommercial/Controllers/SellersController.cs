@@ -55,5 +55,14 @@ namespace SalesWebCommercial.Controllers
 
             return View(obj);
         }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Delete (int id)
+        {
+            _sellerService.Delete(id);
+            return RedirectToAction(nameof(Index));
+        }
     }
 }
