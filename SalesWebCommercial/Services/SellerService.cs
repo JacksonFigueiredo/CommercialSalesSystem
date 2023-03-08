@@ -2,6 +2,7 @@
 using Mysqlx.Crud;
 using NuGet.Protocol.Plugins;
 using SalesWebCommercial.Models;
+using SalesWebCommercial.Services.Exceptions;
 using System.Threading.Channels;
 
 namespace SalesWebCommercial.Services
@@ -21,7 +22,7 @@ namespace SalesWebCommercial.Services
 
         public Seller FindById(int id)
         {
-            return _context.Seller.FirstOrDefault(s => s.Id == id);
+            return _context.Seller.Include(obj => obj.Department).FirstOrDefault(s => s.Id == id);
         }
 
         public void Delete(int id)
@@ -38,6 +39,23 @@ namespace SalesWebCommercial.Services
         {
             _context.Add(seller);
             _context.SaveChanges();
+        }
+
+        public void Update(Seller seller)
+        {    
+            if (!_context.Seller.Any(x => x.Id == seller.Id))
+            {
+                throw new NotFoundException("Id Not Found");
+            }
+            try
+            {
+                _context.Update(seller);
+                _context.SaveChanges();
+            }
+            catch (DbUpdateConcurrencyException e)
+            {
+                throw new DbConcurrencyException(e.Message);
+            }
         }
 
 
