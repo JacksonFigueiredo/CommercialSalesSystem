@@ -4,6 +4,7 @@ using SalesWebCommercial.Models;
 using SalesWebCommercial.Models.ViewModels;
 using SalesWebCommercial.Services;
 using SalesWebCommercial.Services.Exceptions;
+using System.Diagnostics;
 
 namespace SalesWebCommercial.Controllers
 {
@@ -86,7 +87,7 @@ namespace SalesWebCommercial.Controllers
         {
             if (id == null)
             {
-                return NotFound();
+                return RedirectToAction(nameof(Error), new { message = "Id is Null" });
             }
             var obj = _sellerService.FindById(id.Value);
 
@@ -121,6 +122,17 @@ namespace SalesWebCommercial.Controllers
             {
                 return BadRequest();
             }
+        }
+
+        public IActionResult Error (string message)
+        {
+            var viewModel = new ErrorViewModel()
+            {
+                Message = message,
+                RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier
+            };
+
+            return View(viewModel);
         }
     }
 }
