@@ -4,11 +4,16 @@ namespace SalesWebCommercial.Models
 {
     public class Seller
     {
-        public int Id { get; set; } 
+        public int Id { get; set; }
+        [Required(ErrorMessage = "{0} is required")]
+        [StringLength(60,MinimumLength = 3,ErrorMessage = "{0} Should be atleast 3")]
         public string Name { get; set; }
         public string Email { get; set; }
         [Display(Name= "Birth Date")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime BirthDate { get; set; }
+        [DisplayFormat(DataFormatString = "{0:F2}")]
         public double BaseSalary { get; set; }
         public Department Department { get; set; }
         public int  DepartmentId { get; set; }
