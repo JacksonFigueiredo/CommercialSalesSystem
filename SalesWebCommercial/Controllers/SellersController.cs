@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using SalesWebCommercial.Data;
 using SalesWebCommercial.Models;
 using SalesWebCommercial.Models.ViewModels;
 using SalesWebCommercial.Services;
@@ -26,9 +25,9 @@ namespace SalesWebCommercial.Controllers
             return View(list);
         }
 
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-            var departments = _departmentService.ListDepartments();
+            var departments = await _departmentService.ListDepartments();
             var viewModel = new SellerFormViewModel { Departments = departments };
             return View(viewModel);
         }
@@ -36,9 +35,9 @@ namespace SalesWebCommercial.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(Seller seller)
+        public async Task<IActionResult> Create(Seller seller)
         {
-            _sellerService.Insert(seller);
+            await _sellerService.Insert(seller);
             return RedirectToAction(nameof(Index));
         }
 
@@ -67,14 +66,14 @@ namespace SalesWebCommercial.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        public IActionResult Details(int? id)
+        public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var obj = _sellerService.FindById(id.Value);
+            var obj = await _sellerService.FindById(id.Value);
             if (obj == null)
             {
                 return NotFound();
@@ -83,27 +82,27 @@ namespace SalesWebCommercial.Controllers
             return View(obj);
         }
 
-        public IActionResult Edit(int? id)
+        public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
             {
                 return RedirectToAction(nameof(Error), new { message = "Id is Null" });
             }
-            var obj = _sellerService.FindById(id.Value);
+            var obj = await _sellerService.FindById(id.Value);
 
             if (obj == null)
             {
                 return NotFound();
             }
 
-            List<Department> departments = _departmentService.ListDepartments();
+            List<Department> departments = await _departmentService.ListDepartments();
             SellerFormViewModel viewmodel = new SellerFormViewModel() { Seller = obj, Departments = departments };
             return View(viewmodel);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, Seller seller)
+        public async Task<IActionResult> Edit(int id, Seller seller)
         {
             if (id != seller.Id)
             {
@@ -111,7 +110,7 @@ namespace SalesWebCommercial.Controllers
             }
             try
             {
-                _sellerService.Update(seller);
+                await _sellerService.Update(seller);
                 return RedirectToAction(nameof(Index));
             }
             catch (NotFoundException ex)

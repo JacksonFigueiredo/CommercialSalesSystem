@@ -1,6 +1,7 @@
-﻿using SalesWebCommercial.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using SalesWebCommercial.Models;
 
-namespace SalesWebCommercial.Data
+namespace SalesWebCommercial.Services
 {
     public class DepartmentService
     {
@@ -10,9 +11,9 @@ namespace SalesWebCommercial.Data
             _context = context;
         }
 
-        public List<Department> ListDepartments()
+        public async Task<List<Department>> ListDepartments()
         {
-            return _context.Department.OrderBy(x => x.Name).ToList();
+            return await _context.Department.OrderBy(x => x.Name).ToListAsync();
         }
     }
 }
