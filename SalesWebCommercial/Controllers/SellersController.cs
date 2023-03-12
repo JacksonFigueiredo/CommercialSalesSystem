@@ -18,9 +18,9 @@ namespace SalesWebCommercial.Controllers
             _departmentService = departmentService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var list = _sellerService.FindAll();
+            var list = await _sellerService.FindAll();
 
             return View(list);
         }

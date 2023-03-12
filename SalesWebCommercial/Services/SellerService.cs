@@ -15,7 +15,7 @@ namespace SalesWebCommercial.Services
             _context = context;
         }
 
-        public async Task<List<Seller>> FindAll()
+        public async Task<IEnumerable<Seller>> FindAll()
         {
             return await _context.Seller.ToListAsync();
         }
